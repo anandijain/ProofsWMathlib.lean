@@ -81,37 +81,17 @@ theorem exists_class (r : Setoid a) :(∀ x : a, ∃ b ∈ r.classes, x ∈ b) :
   · rw [Setoid.classes]
     use x
   · exact r.refl x
-  
-
 
 theorem covers_unique (r : Setoid a) : (∀ x : a, ∃! b ∈ r.classes, x ∈ b) := by
   intro x
-  -- refine is rewriting the definition of exists unique into an exists goal and a unique goal
-  refine ⟨{z : a | r z x}, ?_, ?_⟩
-  · -- prove it’s in classes and contains x
-    -- the way we do this is to effectively show that the b is the quivalence class of x
-    -- tjis refine destrucrures the and, so that we show {z | r z x} is a class
-    -- and x in this separately
-    refine ⟨?_, ?_⟩
-    · simp [Setoid.classes]
-      use x
-    · exact r.refl x
-  · intro y hy -- now we show that forall y st y class and x in y implies [x] = [y]
-    rcases hy with ⟨hy_classes, xin⟩
-    -- if y is a class and x in y, then we can show that forall z in [x], r z y
-    -- by symm we also show forall zz in [y] r zz x.
-    -- this shows [x] ⊆ [y] and [y] ⊆ [x] thus [x] = [y]
-
-    -- we show here that xc = [x] is a class and x ∈ xc
-
-    let xc : Set a := {z : a | r z x}
-    have hxc : x ∈ xc := by exact r.refl x
-
-    have xc_class : xc ∈ r.classes := by
-      simp [xc, Setoid.classes]
-      use x
-
-    exact nondisjoint_classes_eq r hy_classes xc_class ⟨xin, hxc⟩
+  rcases exists_class r x with ⟨b, hb_classes, hxb⟩
+  refine ⟨b, ?_, ?_⟩
+  · change b ∈ r.classes ∧ x ∈ b
+    exact ⟨hb_classes, hxb⟩
+  · intro y
+    simp
+    intro hy hxe
+    exact nondisjoint_classes_eq r hy hb_classes ⟨hxe, hxb⟩
 
 theorem setoid_is_partition (r : Setoid a) : Setoid.IsPartition r.classes := by
   rw [Setoid.IsPartition]

@@ -1,13 +1,6 @@
 # ProofsWMathlib-lean
 
-## GitHub configuration
+List of proofs 
 
-To set up your new GitHub repository, follow these steps:
+2025_12_30.lean: Prove that an equivalence relation on a set defines a partition.
 
-* Under your repository name, click **Settings**.
-* In the **Actions** section of the sidebar, click "General".
-* Check the box **Allow GitHub Actions to create and approve pull requests**.
-* Click the **Pages** section of the settings sidebar.
-* In the **Source** dropdown menu, select "GitHub Actions".
-
-After following the steps above, you can remove this section from the README file.
