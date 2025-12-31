@@ -36,7 +36,7 @@ example (r : Setoid α) (x y z : α) (h1 : r x y) (h2 : r y z) : r x z := by
 theorem classes_disjoint (r: Setoid a)
   (x y : Set a) (h1 : x ∈ r.classes) (h2 : y ∈ r.classes) (h3 : x ≠ y)
   : x ∩ y = ∅ := by sorry
-  
+
 /-
 3) S ⊆ ⋃X
 the union of the classes covers the set over which the equivalence relation is defined
@@ -77,3 +77,4 @@ theorem set_eq_of_subset_of_subset' (A B : Set α) (hAB : A ⊆ B) (hBA : B ⊆ 
 
 theorem sUnion_classes_equals_set (r : Setoid a) : (Set.univ : Set a) = sUnion r.classes := by
   exact Set.Subset.antisymm (classes_contain_set r) (sUnion_classes_subset_univ r)
+
