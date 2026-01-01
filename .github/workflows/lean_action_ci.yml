@@ -5,17 +5,23 @@ on:
   pull_request:
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read # Read access to repository contents
-  pages: write # Write access to GitHub Pages
-  id-token: write # Write access to ID tokens
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v5
       - uses: leanprover/lean-action@v1
-      - uses: leanprover-community/docgen-action@v1
+      - uses: anandijain/docgen-action@v1   # replace with your repo/tag
+        with:
+          homepage: docs
+          lean-inspect: true
+          lean-inspect-doc-root: docs/docs   # matches homepage/docs output
+          lean-inspect-project-root: .       # adjust if your Lake package is elsewhere
+          # lean-inspect-trace-mode: dense
+          # lean-inspect-trace-dir: .lean-inspect-traces
+          # lean-inspect-inject-debug: true
